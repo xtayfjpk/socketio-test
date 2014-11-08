@@ -1,0 +1,80 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin : 'maven'
+
+group = 'com.xtayfjpk.netty.test'
+version = '1.0.0-SNAPSHOT'
+
+targetCompatibility = '1.6'
+sourceCompatibility = '1.6'
+
+tasks.withType(Compile) { 
+    	options.encoding = "UTF-8" 
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+}
+
+repositories {
+	maven {
+		credentials {
+			username 'admin'
+			password 'password'
+		}
+			url 'http://127.0.0.1:8081/artifactory/repo/'
+	}
+	mavenCentral()
+}
+
+javadoc {
+	options.encoding = "UTF-8"
+}
+
+eclipse {
+	classpath { 
+		downloadSources=true 
+		downloadJavadoc = false
+	}
+}
+
+
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url:'http://127.0.0.1:8081/artifactory/libs-snapshot-local') {
+				authentication(userName: "admin", password: "password")
+			}
+
+		pom.project {
+			description 'google guice test'
+		}
+
+		pom.withXml { XmlProvider xmlProvider ->
+			def xml = xmlProvider.asString()
+			def pomXml = new XmlParser().parse(new ByteArrayInputStream(xml.toString().bytes))
+			def newXml = new StringWriter()
+			def printer = new XmlNodePrinter(new PrintWriter(newXml))
+			printer.preserveWhitespace = true
+			printer.print(pomXml)
+			xml.setLength(0)
+			xml.append(newXml.toString())
+		}
+        }
+    }
+}
+
+
+
+dependencies {
+	compile 'junit:junit:4.11'
+	compile 'com.corundumstudio.socketio:netty-socketio:1.7.3'
+}
