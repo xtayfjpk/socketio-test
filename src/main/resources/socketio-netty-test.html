@@ -3,14 +3,13 @@
 <head>
     <title>socketio-netty测试</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-	<script src="socket.io.js"></script>
+	<script src="socket.io/socket.io-0.9.6.js"></script>
 	<script src="crypto-js/core-min.js"></script>
 	<script src="crypto-js/enc-base64-min.js"></script>
 	<script src="crypto-js/enc-utf16-min.js"></script>
     <script src="jquery-1.7.2.min.js"></script>
 	<script>
 		$(function(){
-			console.info(io);
 			var host = "http://127.0.0.1:8088";
 			var socket = null;
 			if(/MSIE (\d+.\d+);/.test(navigator.userAgent)){
