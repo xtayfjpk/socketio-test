@@ -11,7 +11,6 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.xtayfjpk.socketio.test.bean.Point;
-import com.xtayfjpk.socketio.test.listener.PointListener;
 
 public class Server {
 	private static List<SocketIOClient> clients = new ArrayList<SocketIOClient>();
@@ -19,7 +18,7 @@ public class Server {
 	public static void main(String[] args) throws Exception {
 		Configuration configuration = new Configuration();
 		configuration.setHostname("127.0.0.1");
-		configuration.setPort(8081);
+		configuration.setPort(8082);
 		SocketIOServer server = new SocketIOServer(configuration);
 
 		server.addConnectListener(new ConnectListener() {

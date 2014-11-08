@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>socketio-netty测试</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<script src="socket.io.js"></script>
+	<script src="crypto-js/core-min.js"></script>
+	<script src="crypto-js/enc-base64-min.js"></script>
+	<script src="crypto-js/enc-utf16-min.js"></script>
+    <script src="jquery-1.7.2.min.js"></script>
+	<script>
+		$(function(){
+			console.info(io);
+			var host = "http://127.0.0.1:8088";
+			var socket = null;
+			if(/MSIE (\d+.\d+);/.test(navigator.userAgent)){
+				if(/MSIE 10(.\d+);/.test(navigator.userAgent)){
+					socket = io.connect(host);
+				}else{
+					socket = io.connect(host,{transports:['jsonp-polling']}); 
+				}
+			} else {
+				socket = io.connect(host,{transports:['websocket','flashsocket','htmlfile','xhr-polling','jsonp-polling']}); 
+			}
+
+			socket.on("push", function(data){
+				var words  = CryptoJS.enc.Base64.parse(data);
+				var point  = CryptoJS.enc.Utf8.stringify(words);
+				point = JSON.parse(point);
+				$('#x').text(point.x);
+				$('#y').text(point.y);
+			});
+		});
+		
+	</script>
+</head>
+
+<body>
+	
+	<div id="display" style="height:50px;background-color:grey;">
+		x=<span id="x">0</span>, y=<span id="y">0</span>
+	</div>
+
+</body>
+
+</html>
