@@ -77,4 +77,5 @@ uploadArchives {
 dependencies {
 	compile 'junit:junit:4.11'
 	compile 'com.corundumstudio.socketio:netty-socketio:1.7.3'
+	compile 'org.slf4j:slf4j-simple:1.7.7'
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>socketit测试</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<script src="socket.io/socket.io.js"></script>
+    <script src="jquery-1.7.2.min.js"></script>
+	<script>
+		$(function(){
+			var socket =  io.connect('http://127.0.0.1:8081');
+			console.info(socket);
+
+			socket.on("pushpoint", function(data){
+				$('#x').text(data.x);
+				$('#y').text(data.y);
+			});
+		});
+		
+	</script>
+</head>
+
+<body>
+	
+	<div id="display" style="height:50px;background-color:grey;">
+		x=<span id="x">0</span>, y=<span id="y">0</span>
+	</div>
+
+</body>
+
+</html>
