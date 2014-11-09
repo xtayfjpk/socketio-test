@@ -12,6 +12,11 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.xtayfjpk.socketio.test.bean.Point;
 
+/**
+ * com.corundumstudio.socketio:netty-socketio:1.7.3实现
+ * @author zj
+ *
+ */
 public class Server {
 	private static List<SocketIOClient> clients = new ArrayList<SocketIOClient>();
 

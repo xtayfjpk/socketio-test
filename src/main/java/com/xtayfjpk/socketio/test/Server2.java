@@ -12,6 +12,11 @@ import com.yongboy.socketio.server.IOHandlerAbs;
 import com.yongboy.socketio.server.SocketIOServer;
 import com.yongboy.socketio.server.transport.IOClient;
 
+/**
+ * socketio-netty实现
+ * @author zj
+ *
+ */
 public class Server2 {
 	private static List<IOClient> clients = new ArrayList<IOClient>();
 
