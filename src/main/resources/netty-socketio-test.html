@@ -14,6 +14,10 @@
 				$('#x').text(data.x);
 				$('#y').text(data.y);
 			});
+			
+			$("#emitButton").click(function() {
+				socket.emit("pointevent", {x:$('#x').text(), y:$('#y').text()});
+			});
 		});
 		
 	</script>
@@ -25,6 +29,9 @@
 		x=<span id="x">0</span>, y=<span id="y">0</span>
 	</div>
 
+	<div>
+		<button id="emitButton">发送Point</button>
+	</div>
 </body>
 
 </html>

@@ -5,10 +5,24 @@ apply plugin : 'maven'
 group = 'com.xtayfjpk.netty.test'
 version = '1.0.0-SNAPSHOT'
 
-targetCompatibility = '1.6'
-sourceCompatibility = '1.6'
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
 
-tasks.withType(Compile) { 
+if(System.getenv("USERNAME") == "zjin") {
+	System.setProperty("http.proxyHost", "179.179.179.243")
+	System.setProperty("http.proxyPort", "9847")
+	System.setProperty("http.proxyUser", "")
+	System.setProperty("http.proxyPassword", "")
+	System.setProperty("http.nonProxyHosts", "localhost")
+	
+	System.setProperty("https.proxyHost", "179.179.179.243")
+	System.setProperty("https.proxyPort", "9847")
+	System.setProperty("https.proxyUser", "")
+	System.setProperty("https.proxyPassword", "")
+	System.setProperty("https.nonProxyHosts", "localhost")
+}
+
+tasks.withType(JavaCompile) { 
     	options.encoding = "UTF-8" 
 }
 
@@ -25,13 +39,8 @@ sourceSets {
 
 repositories {
 	maven {
-		credentials {
-			username 'admin'
-			password 'password'
-		}
-			url 'http://127.0.0.1:8081/artifactory/repo/'
+		url "http://maven.aliyun.com/nexus/content/groups/public/"
 	}
-	mavenCentral()
 }
 
 javadoc {
@@ -76,10 +85,10 @@ uploadArchives {
 
 dependencies {
 	compile 'junit:junit:4.11'
-	compile 'com.corundumstudio.socketio:netty-socketio:1.7.3'
+	compile 'com.corundumstudio.socketio:netty-socketio:1.7.11'
 	compile 'org.slf4j:slf4j-simple:1.7.7'
 	
-	compile "com.yongboy:socketio-netty:1.0"
-	compile 'io.netty:netty:3.9.0.Final'
-	compile 'log4j:log4j:1.2.17'
+	//compile "com.yongboy:socketio-netty:1.0"
+	//compile 'io.netty:netty:3.9.0.Final'
+	//compile 'log4j:log4j:1.2.17'
 }

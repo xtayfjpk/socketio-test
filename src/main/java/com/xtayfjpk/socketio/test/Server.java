@@ -11,6 +11,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.xtayfjpk.socketio.test.bean.Point;
+import com.xtayfjpk.socketio.test.listener.PointListener;
 
 /**
  * com.corundumstudio.socketio:netty-socketio:1.7.3实现
@@ -21,6 +22,7 @@ public class Server {
 	private static List<SocketIOClient> clients = new ArrayList<SocketIOClient>();
 
 	public static void main(String[] args) throws Exception {
+		System.setProperty("io.netty.leakDetectionLevel", "advanced");
 		Configuration configuration = new Configuration();
 		configuration.setHostname("127.0.0.1");
 		configuration.setPort(8082);
@@ -34,7 +36,7 @@ public class Server {
 			}
 		});
 		
-		//server.addEventListener("pointevent", Point.class, new PointListener());
+		server.addEventListener("pointevent", Point.class, new PointListener());
 		server.start();
 		System.out.println("server started");
 		Timer timer = new Timer();
@@ -46,7 +48,7 @@ public class Server {
 					client.sendEvent("pushpoint", new Point(random.nextInt(100), random.nextInt(100)));
 				}
 			}
-		}, 1000, 1000);
+		}, 1000, 3000);
 		
 		Object object = new Object();
 		synchronized (object) {
